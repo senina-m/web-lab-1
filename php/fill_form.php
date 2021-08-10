@@ -1,9 +1,9 @@
 <?php
-require_once 'Attempt.php';
-require_once 'Coordinates.php';
-require_once 'exceptions/empty_data_exception.php';
-require_once 'exceptions/incorrect_input_data_exception.php';
-require_once 'Coordinates_verifier.php';
+require_once 'dto/Attempt.php';
+require_once 'dto/Coordinates.php';
+require_once 'exceptions/Empty_data_exception.php';
+require_once 'exceptions/Incorrect_input_data_exception.php';
+require_once 'verifiers/Coordinates_verifier.php';
 session_start();
 
 $attempts = (isset ($_SESSION["attempts"])) ? ($_SESSION["attempts"]) : array();
@@ -11,10 +11,10 @@ header('Content-type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $coords = new Coordinates(notEmptyData(array($_POST["x"], $_POST["y"], $_POST["r"])));
-        $verifier = new Coordinates_verifier($coords);
+        $coords = new Coordinates(not_empty_data(array($_POST["x"], $_POST["y"], $_POST["r"])));
+        $verifier = new Coordinates_verifier();
         $start_time = microtime(true);
-        $result = $verifier->verify();
+        $result = $verifier->verify($coords);
         $script_time = microtime(true) - $start_time;
         $current_attempt = new Attempt($coords, $result, $script_time);
         array_push($attempts, $current_attempt);
@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode($attempts);
 //        echo "<br>";
 //        print_r($attempts);
-
 
 //        echo "<br><br>Last attempt: X:".$current_attempt->get_coordinates()->get_x()."\n Y:".$current_attempt->get_coordinates()->
 //            get_y()."\n R:".$current_attempt->get_coordinates()->get_r()."\n result:".$current_attempt->
@@ -50,7 +49,7 @@ function array_to_table($header_table, $table)
     echo "</table>\n";
 }
 
-function notEmptyData($data)
+function not_empty_data($data)
 {
     foreach ($data as $datum) {
         if (empty($datum)){
