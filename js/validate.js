@@ -1,56 +1,89 @@
-var form = document.querySelector('.formWithValidation')
+submitData = function (){
 
-form.addEventListener('submit', function (event) {
-    event.preventDefault()
-    if (validateForm()) {
-        form.submit()
+    const form = document.querySelector('.formWithValidation');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        try {
+            let coordinates = validateForm();
+            // form.submit();
+            let pointsArray = sendData(coordinates); //todo: rename method sendData
+            //todo: validate data from server (?)
+            drawTable(pointsArray);
+            drawPlot(pointsArray);
+        } catch (err) {
+            //todo: here could be an exception that data wasn't sent properly
+        }
+    })
+
+    const validateForm = function () {
+        let coordinates = getValues();
+        removeErrors();
+        if(!checkValues(coordinates)){
+            throw new Error("Entered coordinates are incorrect!"); //todo: create my oun exception
+        }
+        return coordinates;
+
     }
-})
 
-var validateForm = function () {
-    logValues()
-    removeErrors()
-    return checkValues()
-}
-
-var printError = function (errorName, errorClass, errorMessage, element) {
-    console.log(errorName, element)
-    var error = document.createElement('div')
-    error.className = errorClass
-    error.innerHTML = errorMessage
-    element.parentElement.insertBefore(error, element)
-}
-var removeErrors = function () {
-    var errors = form.querySelectorAll('.error')
-    for (var i = 0; i < errors.length; i++) {
-        errors[i].remove()
+    const printError = function (errorName, errorClass, errorMessage, element) {
+        console.log(errorName, element);
+        const error = document.createElement('div');
+        error.className = errorClass;
+        error.innerHTML = errorMessage;
+        element.parentElement.insertBefore(error, element);
     }
-}
 
-var logValues = function () {
-    console.log('clicked on validate')
-    console.log('y: ', y.value)
-    console.log('r: ', r.value)
-}
+    const checkValues = function (coordinates) {
+        let anyErrors = 0;
 
-var checkValues = function () {
-    var fields = form.querySelectorAll('.field')
-    let anyErrors = 0
+        for (let field in coordinates) {
+            if (!field.value) {
+                printError('field is blank', 'blankField error', 'Cannot be blank', field);
+                anyErrors++;
+            }
+        }
 
-    for (var i = 0; i < fields.length; i++) {
-        if (!fields[i].value) {
-            printError('field is blank', 'blankField error', 'Cannot be blank', fields[i])
-            anyErrors++
+        if (coordinates.y.value > 3 || coordinates.y.value < -5 || isNaN(Number(coordinates.y.value))) {
+            printError('y is out of range', 'y error', 'Has to be number from -5 to 3', coordinates.y);
+            anyErrors++;
+        }
+        if (coordinates.r.value > 5 || coordinates.r.value < 2 || isNaN(Number(coordinates.r.value))) {
+            printError('r is out of range', 'r error', 'Has to be number from 2 to 5', coordinates.r);
+            anyErrors++;
+        }
+        return anyErrors === 0;
+    }
+    const getValues = function () {
+        console.log('clicked on validate');
+        let x = document.getElementById('x');
+        let y = document.getElementById('y');
+        let r = document.getElementById('r');
+        console.log('x: ', x.value);
+        console.log('y: ', y.value);
+        console.log('r: ', r.value);
+        return {x, y, r};
+    }
+
+    const removeErrors = function () {
+        const errors = form.querySelectorAll('.error');
+        for (let i = 0; i < errors.length; i++) {
+            errors[i].remove();
         }
     }
 
-    if (y.value == "" || y.value > 3 || y.value < -5 || isNaN(Number(y.value))) {
-        printError('y is out of range', 'y error', 'Has to be number from -5 to 3', y)
-        anyErrors++
+    async function sendData(coordinates, url) {
+        let response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(coordinates)
+        });
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error("Ошибка HTTP: " + response.status); //todo: create my oun exception
+        }
     }
-    if (r.value == "" || r.value > 5 || r.value < 2 || isNaN(Number(r.value))) {
-        printError('r is out of range', 'r error', 'Has to be number from 2 to 5', r)
-        anyErrors++
-    }
-    return anyErrors == 0
 }
