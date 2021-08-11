@@ -9,9 +9,12 @@ session_start();
 $attempts = (isset ($_SESSION["attempts"])) ? ($_SESSION["attempts"]) : array();
 header('Content-type: application/json');
 
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $coords = new Coordinates(not_empty_data(array($_POST["x"], $_POST["y"], $_POST["r"])));
+        $coords = new Coordinates(not_empty_data($data));
         $verifier = new Coordinates_verifier();
         $start_time = microtime(true);
         $result = $verifier->verify($coords);
