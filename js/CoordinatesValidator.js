@@ -1,5 +1,4 @@
-class CoordinatesValidator {
-    validateForm() {
+    validateForm = () => {
         let coordinates = this.getValues();
         this.removeErrors();
         if(!this.checkValues(coordinates)){
@@ -9,7 +8,7 @@ class CoordinatesValidator {
 
     }
 
-    printError(errorName, errorClass, errorMessage, element) {
+    printError = (errorName, errorClass, errorMessage, element) => {
         console.log(errorName, element);
         const error = document.createElement('div');
         error.className = errorClass;
@@ -17,7 +16,7 @@ class CoordinatesValidator {
         element.parentElement.insertBefore(error, element);
     }
 
-    checkValues(coordinates) {
+    checkValues = (coordinates) => {
         let anyErrors = 0;
 
         for (let field in coordinates) {
@@ -38,7 +37,7 @@ class CoordinatesValidator {
         return anyErrors === 0;
     }
 
-    getValues() {
+    getValues = () => {
         console.log('clicked on validate');
         let x = document.getElementById('x');
         let y = document.getElementById('y');
@@ -49,10 +48,9 @@ class CoordinatesValidator {
         return {x, y, r};
     }
 
-    removeErrors() {
+    removeErrors = () => {
         const errors = document.querySelectorAll('.error'); //todo: search in form only
         for (let i = 0; i < errors.length; i++) {
             errors[i].remove();
         }
     }
-}

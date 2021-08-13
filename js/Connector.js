@@ -1,5 +1,4 @@
-class Connector {
-    async sendData(coordinates, url) {
+    sendData = async (coordinates, url) => {
         let response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -13,4 +12,3 @@ class Connector {
             throw new Error("Ошибка HTTP: " + response.status); //todo: create my oun exception
         }
     }
-}
