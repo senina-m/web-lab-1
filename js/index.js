@@ -1,17 +1,19 @@
-submitData = function (){
+submitData = function (event) {
+    event.preventDefault();
+    const form = document.getElementsByClassName('form');
 
-    const form = document.querySelector('.formWithValidation');
-
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
+    console.log('form: ' + form)
+    try {
+        console.log('Start processing form')
         try {
-            alert("i'm here!");
-            let pointsArray = sendData(validateForm()); //todo: rename method sendData
-            //todo: validate data from server (?)
-            drawTable(pointsArray);
-            drawPlot(pointsArray);
+            let pointsArray = sendData(validateForm(), "http://localhost:63342/web-lab-1/php/main.php"); //todo: rename method sendData
         } catch (err) {
-            //todo: here could be an exception that data wasn't sent properly
+            printFormError(err)
         }
-    })
+        // todo: validate data from server (?)
+        drawTable(pointsArray);
+        drawPlot(pointsArray);
+    } catch (err) {
+        //todo: here could be an exception that data wasn't sent properly
+    }
 }

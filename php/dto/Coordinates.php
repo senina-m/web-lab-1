@@ -1,5 +1,5 @@
 <?php
-require_once '../exceptions/Incorrect_input_data_exception.php';
+require_once 'exceptions/Incorrect_input_data_exception.php';
 
 class Coordinates
 {
@@ -39,6 +39,11 @@ class Coordinates
     {
         return $this->r;
     }
-}
 
-?>
+//    public function jsonSerialize()
+//    {
+//        return "x:".$this->x.",".
+//            "y:".$this->y.",".
+//            "r:".$this->r;
+//    }
+}

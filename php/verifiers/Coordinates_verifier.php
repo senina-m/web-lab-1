@@ -1,5 +1,5 @@
 <?php
-require_once '../dto/Coordinates.php';
+require_once 'dto/Coordinates.php';
 class Coordinates_verifier
 {
     public function verify($coordinates)
@@ -16,4 +16,3 @@ class Coordinates_verifier
         }
     }
 }
-?>

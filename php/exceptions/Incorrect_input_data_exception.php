@@ -6,4 +6,3 @@ class Incorrect_input_data_exception extends Exception
         parent::__construct($message);
     }
 }
-?>

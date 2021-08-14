@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Area counter - lab 1</title>
     <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/Connector.js"></script>
+    <script type="text/javascript" src="js/Plot.js"></script>
+    <script type="text/javascript" src="js/Table.js"></script>
+    <script type="text/javascript" src="js/CoordinatesValidator.js"></script>
     <link rel="stylesheet" href="styles/form_page.css">
 </head>
 <body>
@@ -11,8 +16,8 @@
 <div id="mainPart">
     <h1>Check if coordinates fit the area</h1>
     <img src="images/web_lab1.jpg"> <br>
-<!--    action="php/fill_form.php"-->
-    <form  class='formWithValidation' method="post">
+<!--    action="php/main.php"-->
+    <form  class='form'>
         <fieldset class="shadowbox">
             <legend>Enter coordinates:</legend>
             <div>
@@ -20,8 +25,8 @@
                     <label>X:</label>
                 </div>
                 <div>
-                    <select id="x" name="x" class='x field'>
-                        <option value="-4">-4</option>
+                    <select id="x" name="x" class='x'>
+                        <option value="-4" selected="selected">-4</option>
                         <option value="-3">-3</option>
                         <option value="-2">-2</option>
                         <option value="-1">-1</option>
@@ -50,13 +55,11 @@
                 </div>
             </div>
             <div>
-                <input type="submit" class='validateBtn' value="Submit" onclick="submitData()">
+                <input type="submit" id="submitButton" class='validateBtn' value="Submit" onclick="submitData(event)">
             </div>
         </fieldset>
     </form>
 </div>
-<script type="text/javascript" src="js/index.js"></script>
-<!--<script type="text/javascript" src="js/draw.js"></script>-->
 <div id=plot></div>
 <ol id="notes">
     <li> Тег u нужен чтобы <u>подчеркнуть</u> слово</li>

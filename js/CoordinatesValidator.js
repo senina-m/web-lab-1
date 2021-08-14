@@ -1,4 +1,5 @@
     validateForm = () => {
+        console.log('Start validating')
         let coordinates = this.getValues();
         this.removeErrors();
         if(!this.checkValues(coordinates)){
@@ -8,8 +9,8 @@
 
     }
 
-    printError = (errorName, errorClass, errorMessage, element) => {
-        console.log(errorName, element);
+    printError = (errorLogName, errorClass, errorMessage, element) => {
+        console.log(errorLogName);
         const error = document.createElement('div');
         error.className = errorClass;
         error.innerHTML = errorMessage;
@@ -19,33 +20,38 @@
     checkValues = (coordinates) => {
         let anyErrors = 0;
 
-        for (let field in coordinates) {
-            if (!field.value) {
-                this.printError('field is blank', 'blankField error', 'Cannot be blank', field);
-                anyErrors++;
-            }
+        if (printErrorIfBlank(coordinates.y, 'y') || printErrorIfBlank(coordinates.r, 'r')) {
+            anyErrors++;
         }
 
-        if (coordinates.y.value > 3 || coordinates.y.value < -5 || isNaN(Number(coordinates.y.value))) {
+        if (coordinates.y > 3 || coordinates.y < -5 || isNaN(Number(coordinates.y))) {
             this.printError('y is out of range', 'y error', 'Has to be number from -5 to 3', coordinates.y);
             anyErrors++;
         }
-        if (coordinates.r.value > 5 || coordinates.r.value < 2 || isNaN(Number(coordinates.r.value))) {
+        if (coordinates.r > 5 || coordinates.r < 2 || isNaN(Number(coordinates.r))) {
             this.printError('r is out of range', 'r error', 'Has to be number from 2 to 5', coordinates.r);
             anyErrors++;
         }
         return anyErrors === 0;
     }
 
+    printErrorIfBlank = (field, fieldName) =>{
+        console.log('Field value:' + field)
+        if (field === '') {
+            this.printError(fieldName + ' field is blank', 'blankField error', 'Cannot be blank', field);
+            return false;
+        }
+    }
+
     getValues = () => {
-        console.log('clicked on validate');
+        console.log('Received values:');
         let x = document.getElementById('x');
         let y = document.getElementById('y');
         let r = document.getElementById('r');
         console.log('x: ', x.value);
         console.log('y: ', y.value);
         console.log('r: ', r.value);
-        return {x, y, r};
+        return {x:x.value, y:y.value, r:r.value};
     }
 
     removeErrors = () => {
@@ -53,4 +59,9 @@
         for (let i = 0; i < errors.length; i++) {
             errors[i].remove();
         }
+    }
+
+    printFormError = (err) =>{
+        const submitButton = document.getElementById('submitButton'); //todo: search in form only
+        printError('Form error: ' + err.message, 'network error', err.message, submitButton);
     }

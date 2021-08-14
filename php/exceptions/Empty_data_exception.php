@@ -7,4 +7,3 @@ class empty_data_exception extends Exception
         parent::__construct($message);
     }
 }
-?>
