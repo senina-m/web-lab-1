@@ -11,13 +11,14 @@
     <script type="text/javascript" src="js/CoordinatesValidator.js"></script>
     <link rel="stylesheet" href="styles/form_page.css">
 </head>
-<body>
+<body onload="drawPlot(undefined)">
+<div id="pong"></div>
 <div id="heat"> Senina Mariya Michailovna P3212<br>Variant: 12019<br></div>
 <div id="mainPart">
     <h1>Check if coordinates fit the area</h1>
     <img src="images/web_lab1.jpg" id="plot_image"> <br>
     <div id="plot_block">
-        <div id=plot></div>
+        <div id='plot'></div>
         <div>
             <input type="button" id="clearButton" value="Clear">
         </div>
@@ -27,9 +28,7 @@
             <legend>Enter coordinates:</legend>
             <div>
                 <div>
-                    <label>X:</label>
-                </div>
-                <div>
+                    <label for="x">X: </label>
                     <select id="x" name="x" class='x'>
                         <option value="-4" selected="selected">-4</option>
                         <option value="-3">-3</option>
@@ -45,17 +44,13 @@
             </div>
             <div>
                 <div>
-                    <label>Y:</label>
-                </div>
-                <div>
+                    <label for="y">Y:</label>
                     <input type="text" class='y field' id="y" name="y" value="1">
                 </div>
             </div>
             <div>
                 <div>
-                    <label>R:</label>
-                </div>
-                <div>
+                    <label for="r">R:</label>
                     <input type="text" class='r field' id="r" name="r" value="2">
                 </div>
             </div>
