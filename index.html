@@ -15,8 +15,13 @@
 <div id="heat"> Senina Mariya Michailovna P3212<br>Variant: 12019<br></div>
 <div id="mainPart">
     <h1>Check if coordinates fit the area</h1>
-    <img src="images/web_lab1.jpg"> <br>
-<!--    action="php/main.php"-->
+    <img src="images/web_lab1.jpg" id="plot_image"> <br>
+    <div id="plot_block">
+        <div id=plot></div>
+        <div>
+            <input type="button" id="clearButton" value="Clear">
+        </div>
+    </div>
     <form  class='form'>
         <fieldset class="shadowbox">
             <legend>Enter coordinates:</legend>
@@ -60,7 +65,7 @@
         </fieldset>
     </form>
 </div>
-<div id=plot></div>
+
 <ol id="notes">
     <li> Тег u нужен чтобы <u>подчеркнуть</u> слово</li>
     <li> Тег i нужен чтобы <i>написать курсивом</i></li>

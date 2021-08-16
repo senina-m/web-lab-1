@@ -9,11 +9,14 @@ sendData = async (coordinates, url) => {
         body: JSON.stringify(coordinates)
     });
 
-
     if (response.ok) {
-        let json = await response.json();
-        console.log(json);
-        return json;
+        if (response.ok) {
+            let json = await response.json();
+            console.log(json);
+            return json;
+        } else {
+            throw new Error("Ошибка HTTP: " + response.status); //todo: create my oun exception
+        }
     } else {
         throw new Error("Ошибка HTTP: " + response.status); //todo: create my oun exception
     }

@@ -36,7 +36,12 @@ h1 {
 	font-size: 0.9em;
 }
 
+#plot_block{
+	visibility:hidden;
+}
+
 #plot{
 	width:100%;
 	height:100%;
+
 }
