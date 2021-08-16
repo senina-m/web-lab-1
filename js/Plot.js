@@ -8,6 +8,10 @@ const AXES_COLOR = '#000'
 const AREA_COLOR = '#1ff';
 let scale = 0.017;
 
+let clearedAt = 0;
+let lastElementNum = 0;
+const DEFAULT_R = 2;
+
 drawPlot = (pointsArray) => {
 
 
@@ -16,25 +20,25 @@ drawPlot = (pointsArray) => {
             .addTo('#plot')
             .size(WIDTH, HEIGHT)
             .viewbox(0, 0, WIDTH, HEIGHT);
-        //r by default
-        const defaultR = 2;
-        initPlot(defaultR);
+        initPlot();
     } else {
         drawPlotWithPoints(pointsArray);
     }
 }
 
-initPlot = (r) => {
+initPlot = () => {
     console.log('Init plot!');
     CANVAS.rect(WIDTH, HEIGHT).fill(BACKGROUND_COLOR);
-    console.log("R value while init:" + r);
-    drawArea(r);
+    console.log("R value while init:" + DEFAULT_R);
+    drawArea(DEFAULT_R);
     drawAxes();
-    drawAxesScaleLabels(r);
+    drawAxesScaleLabels(DEFAULT_R);
 }
 
 drawPlotWithPoints = (pointsArray) => {
     console.log('Ready to draw plot!')
+    lastElementNum = pointsArray.length - 1;
+
     CANVAS.rect(WIDTH, HEIGHT).fill(BACKGROUND_COLOR);
 
     scale = countScale(pointsArray);
@@ -46,8 +50,16 @@ drawPlotWithPoints = (pointsArray) => {
     drawAxes();
     drawAxesScaleLabels(r);
 
-    pointsArray.forEach(point => drawPoint(point.x, point.y, point.result, 5));
+    for (i = clearedAt; i <= lastElementNum; i++){
+        let point = pointsArray[i];
+        drawPoint(point.x, point.y, point.result, 5);
+    }
     drawPoint(lastPoint.x, lastPoint.y, lastPoint.result, 10);
+}
+
+clearPlot = () => {
+    clearedAt = lastElementNum;
+    initPlot();
 }
 
 //todo: сделать так чтобы методы из этого файла были "приватные" -- либо переименовать, чтобы не путались
