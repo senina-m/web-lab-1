@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //        echo $current_attempt->jsonSerialize();
         array_push($attempts, $current_attempt);
         $_SESSION["attempts"] = $attempts;
-        echo json_encode($attempts);
 //        session_destroy();
+        echo json_encode($attempts);
 
 //        echo "<br>";
 //        print_r($attempts);
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function not_empty_data($data)
 {
     foreach ($data as $datum) {
-        if (empty($datum)){
+        if ($datum == ""){
             throw new empty_data_exception('Input data is empty!');
         }
     }

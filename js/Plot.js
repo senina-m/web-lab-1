@@ -55,6 +55,7 @@ drawPlotWithPoints = (pointsArray) => {
         drawPoint(point.x, point.y, point.result, 5);
     }
     drawPoint(lastPoint.x, lastPoint.y, lastPoint.result, 10);
+    drawRValue(r);
 }
 
 clearPlot = () => {
@@ -75,14 +76,14 @@ convertY = (y) => {
 }
 
 countScale = (pointsArray) => {
-    const scaleNum = 50; //todo: find better value
+    const scaleNum = 200; //todo: find better value
     console.log(JSON.stringify(pointsArray));
     let max = Math.abs(pointsArray[0].x);
     let newScale;
     pointsArray.forEach(point => {
         newScale = max =
             (Math.abs(point.x) > max || (Math.abs(point.y) > max)) ?
-                Math.max(point.x, point.y) / scaleNum :
+                Math.max(Math.abs(point.x), (Math.abs(point.y))) / scaleNum :
                 scale;
     });
     console.log('scale = ' + newScale)
@@ -124,8 +125,8 @@ drawAxes = () => {
 }
 
 function drawScaleLabel(xStart, xStop, yStart, yStop, labelX, labelY, label) {
-    console.log('Label stroke input coordinates for ' + label + ': ' + xStart + ' ' + yStart + ' ' + xStop + ' ' + yStop)
-    console.log('Label stroke coordinates ' + label + ': ' + convertX(xStart) + ' ' + convertY(yStart) + ' ' + convertX(xStop) + ' ' + convertY(yStop) + '\n');
+    // console.log('Label stroke input coordinates for ' + label + ': ' + xStart + ' ' + yStart + ' ' + xStop + ' ' + yStop)
+    // console.log('Label stroke coordinates ' + label + ': ' + convertX(xStart) + ' ' + convertY(yStart) + ' ' + convertX(xStop) + ' ' + convertY(yStop) + '\n');
     CANVAS.line(convertX(xStart), convertY(yStart), convertX(xStop), convertY(yStop))
         .stroke({width: 2, color: AXES_COLOR});
     CANVAS.text(label).font({
@@ -134,6 +135,15 @@ function drawScaleLabel(xStart, xStop, yStart, yStop, labelX, labelY, label) {
         anchor: 'end',
         fill: AXES_COLOR
     }).move(convertX(labelX), convertY(labelY));
+}
+
+drawRValue = (r) => {
+    CANVAS.text('R = ' + r).font({
+        size: 16,
+        family: 'Menlo, sans-serif',
+        anchor: 'end',
+        fill: AXES_COLOR
+    }).move(WIDTH - 50, HEIGHT - 50);
 }
 
 drawAxesScaleLabels = (r) => { //todo: высчитывать координаты аккуратнее
