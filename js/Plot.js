@@ -50,7 +50,7 @@ drawPlotWithPoints = (pointsArray) => {
     drawAxes();
     drawAxesScaleLabels(r);
 
-    for (i = clearedAt; i <= lastElementNum; i++){
+    for (let i = clearedAt; i <= lastElementNum; i++){
         let point = pointsArray[i];
         drawPoint(point.x, point.y, point.result, 5);
     }
