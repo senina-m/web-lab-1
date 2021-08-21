@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e6fa3abf-417b-4bf1-9e5f-6102ac86a178" name="web-lab-1" url="http://localhost:63342/">
+        <fileTransfer mountedRoot="C:\Users\senin\PhpstormProjects\web-lab-1" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
