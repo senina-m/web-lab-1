@@ -1,6 +1,6 @@
 drawTable = function (pointsArray) {
     console.log('Start to draw table');
-    console.log(typeof pointsArray);
+    // console.log(typeof pointsArray);
 
     let new_tbody = document.createElement('tbody');
     for (let i = 0; i < pointsArray.length; i++){
