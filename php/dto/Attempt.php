@@ -1,6 +1,6 @@
 <?php
 
-class Attempt implements \JsonSerializable
+class Attempt
 {
     private $coordinates;
     private $x;

@@ -54,8 +54,7 @@ getValues = () => {
 }
 
 removeErrors = () => {
-    const form = document.getElementById('form');
-    const errors = form.querySelectorAll('.error');
+    const errors = document.querySelectorAll('.error');
     for (let i = 0; i < errors.length; i++) {
         errors[i].remove();
     }
