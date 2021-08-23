@@ -1,11 +1,11 @@
 @media screen and (min-width: 600px) {
     .title{
-        display: block;
-        direction: rtl;
-        alignment: center;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
     }
 
-    .main_title{
+    .title_label{
         display: inline-block;
         margin-left: 2%;
         margin-right: 10%;
@@ -14,8 +14,7 @@
     #heat{
         display: inline-block;
         /*margin-left: 0%;*/
-        margin-right: 30%;
-        alignment: left;
+        alignment: right;
     }
 
     .top_box {
@@ -42,6 +41,12 @@
 
     .table_block {
         /*width: 100%;*/
+    }
+
+    .description {
+        width: 60%;
+        margin-left: 2%;
+        margin-right: 2%;
     }
 
 }
