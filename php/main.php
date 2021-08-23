@@ -21,40 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $verifier->verify($coords);
         $script_time = microtime(true) - $start_time;
         $current_attempt = new Attempt($coords, $result, $script_time);
-//        echo $current_attempt->jsonSerialize();
         array_push($attempts, $current_attempt);
         $_SESSION["attempts"] = $attempts;
+//        $_SESSION["attempts"] = array();
 //        session_destroy();
         echo json_encode($attempts);
+        //todo: think about situation when there is only one element in array -- it steel has to be encoded as array
 
-//        echo "<br>";
-//        print_r($attempts);
-
-//        echo "<br><br>Last attempt: X:".$current_attempt->get_coordinates()->get_x()."\n Y:".$current_attempt->get_coordinates()->
-//            get_y()."\n R:".$current_attempt->get_coordinates()->get_r()."\n result:".$current_attempt->
-//            get_result()."\n time:".$current_attempt->get_time()."\n scriptTime:".$current_attempt->get_script_time()."ms";
     } catch (Exception $e) {
         echo json_encode($e->getMessage());
-//        echo $e->getMessage();
     }
 }
-
-//function array_to_table($header_table, $table)
-//{
-//    echo "<table>\n";
-//    //header
-//    foreach ($header_table as $header) {
-//        echo "<th>" . $header . "</th>";
-//    }
-//    while ($line = pg_fetch_array($table, null, PGSQL_ASSOC)) {
-//        echo "\t<tr>\n";
-//        foreach ($line as $col_value) {
-//            echo "\t\t<td>$col_value</td>\n";
-//        }
-//        echo "\t</tr>\n";
-//    }
-//    echo "</table>\n";
-//}
 
 function not_empty_data($data)
 {

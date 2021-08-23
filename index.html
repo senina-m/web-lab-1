@@ -9,72 +9,82 @@
     <script type="text/javascript" src="js/Plot.js"></script>
     <script type="text/javascript" src="js/Table.js"></script>
     <script type="text/javascript" src="js/CoordinatesValidator.js"></script>
-    <link rel="stylesheet" href="styles/form_page.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" media="handheld" href="styles/mobile.css">
+    <link rel="stylesheet" media="screen and (min-width: 600px)" href="styles/screen.css">
 </head>
 <body onload="drawPlot(undefined)">
-<div id="heat"> Senina Mariya Michailovna P3212<br>Variant: 12019<br></div>
-<div id="mainPart">
-    <h1>Check if coordinates fit the area</h1>
-    <img src="images/web_lab1.jpg" id="plot_image"> <br>
-    <div id="plot_block">
+<div class="title">
+    <h1 class="main_title">Check if coordinates fit the area</h1>
+    <div id="heat"> Senina Mariya Michailovna P3212<br>Variant: 12019<br></div>
+</div>
+
+<div class="top_box">
+    <div class="plot">
         <div id='plot'></div>
         <div>
-            <input type="button" id="clearButton" onclick="clearPlot()" value="Clear">
+            <input type="button" class="clearButton" onclick="clearPlot()" value="Clear">
         </div>
     </div>
-    <form  class='form'>
-        <fieldset class="shadowbox">
-            <legend>Enter coordinates:</legend>
-            <div>
-                <div>
-                    <label for="x">X: </label>
-                    <select id="x" name="x" class='x'>
-                        <option value="-4" selected="selected">-4</option>
-                        <option value="-3">-3</option>
-                        <option value="-2">-2</option>
-                        <option value="-1">-1</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <label for="y">Y:</label>
-                    <input type="text" class='y field' id="y" name="y" value="1">
-                </div>
-            </div>
-            <div>
-                <div>
-                    <label for="r">R:</label>
-                    <input type="text" class='r field' id="r" name="r" value="2">
-                </div>
-            </div>
-            <div>
-                <input type="submit" id="submitButton" class='validateBtn' value="Submit" onclick="submitData(event)">
-            </div>
-        </fieldset>
-    </form>
-</div>
-<div id="table_block">
-    <table id='table' border="1">
-        <thead>
-            <tr>
-                <td> x </td>
-                <td> y </td>
-                <td> r </td>
-                <td> result </td>
-                <td> time </td>
-                <td> script time </td>
-            </tr>
-        </thead>
-        <tbody id="table_body">
 
-        </tbody>
-    </table>
+    <div class="table_form_box">
+        <div class="form">
+            <form class='form'>
+                <fieldset class="shadowbox">
+                    <legend>Enter coordinates:</legend>
+                    <div>
+                        <div>
+                            <label for="x">X: </label>
+                            <select id="x" name="x" class='x'>
+                                <option value="-4" selected="selected">-4</option>
+                                <option value="-3">-3</option>
+                                <option value="-2">-2</option>
+                                <option value="-1">-1</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="y">Y:</label>
+                            <input type="text" class='y field' id="y" name="y" value="1">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="r">R:</label>
+                            <input type="text" class='r field' id="r" name="r" value="2">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" id="submitButton" class='validateBtn' value="Submit"
+                               onclick="submitData(event)">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div id="table_block">
+            <table id='table' class="styled-table">
+                <thead>
+                <tr>
+                    <td> x</td>
+                    <td> y</td>
+                    <td> r</td>
+                    <td> result</td>
+                    <td> time</td>
+                    <td> script time</td>
+                </tr>
+                </thead>
+                <tbody id="table_body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <ol id="notes">

@@ -1,5 +1,6 @@
-const WIDTH = 500; //todo: рассчитывать изходя из размера страницы и css правил для данного элемента
-const HEIGHT = 500;
+let WIDTH = 500;
+//todo: рассчитывать изходя из размера страницы и css правил для данного элемента
+let HEIGHT = 500;
 const X_CENTER = 0;
 const Y_CENTER = 0;
 const BACKGROUND_COLOR = '#fff';
@@ -20,7 +21,7 @@ drawPlot = (pointsArray) => {
     if (pointsArray === undefined) {
         CANVAS = SVG()
             .addTo('#plot')
-            .size(WIDTH, HEIGHT)
+            .size('100%', '100%')
             .viewbox(0, 0, WIDTH, HEIGHT);
         initPlot();
     } else {
@@ -43,7 +44,8 @@ initPlot = () => {
 }
 
 drawPlotWithPoints = (pointsArray) => {
-    console.log('Ready to draw plot!')
+    console.log('Ready to draw plot!');
+    console.log(pointsArray);
     lastElementNum = pointsArray.length - 1;
 
     CANVAS.rect(WIDTH, HEIGHT).fill(BACKGROUND_COLOR);
@@ -223,9 +225,7 @@ countPointLocation = (coords) => {
 
 drawPoint = (x, y, result, pointScale) => {
     let color = result === 'true' ? '#0f0' : '#f00';
-    CANVAS.circle(pointScale).fill(color).move(convertX(x), convertY(y))
-    // console.log('x:' + x + ', y:' + y)
-    // console.log('scale ' + pointScale + ', x:' + convertX(x) + ', y:' + convertY(y))
+    CANVAS.circle(pointScale).fill(color).move(convertX(x) - pointScale/2, convertY(y) - pointScale/2);
 }
 
 getCoordinates = () => {
@@ -263,7 +263,7 @@ function getCoords(event, element) {
     console.log('yPosition: ' + yPosition + ' Y: ' + (event.clientY - yPosition));
 
     coordinates.x = convertToCoordinatesX(event.clientX - xPosition);
-    coordinates.y = convertToCoordinatesX(event.clientY - yPosition);
+    coordinates.y = convertToCoordinatesY(event.clientY - yPosition);
     coordinates.r = parseFloat(prompt('Please enter R value!', '2'));
     console.log('X: ' + coordinates.x);
     console.log('Y: ' + coordinates.y);

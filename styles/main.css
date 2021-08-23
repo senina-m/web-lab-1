@@ -1,0 +1,75 @@
+body {
+    background-color: lightblue;
+    font-family: "Lucida Console", "Courier New", monospace;
+    alignment: center;
+
+}
+
+h1 {
+    color: seagreen;
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 150%;
+}
+
+#heat {
+    color: seagreen;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+    alignment: left;
+    /*margin-left: 3%;*/
+    /*margin-bottom: 3%;*/
+}
+
+.clearButton{
+    width: 100%;
+}
+
+.shadowbox {
+    border: 1px solid #333;
+    box-shadow: 8px 8px 5px #444;
+    padding: 8px 12px;
+    background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: seagreen;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: seagreen;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid seagreen;
+}
