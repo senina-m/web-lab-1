@@ -1,6 +1,6 @@
-let WIDTH = 500;
-//todo: рассчитывать изходя из размера страницы и css правил для данного элемента
-let HEIGHT = 500;
+let WIDTH = 1000;
+
+let HEIGHT = 1000;
 const X_CENTER = 0;
 const Y_CENTER = 0;
 const BACKGROUND_COLOR = '#fff';
@@ -72,8 +72,6 @@ clearPlot = () => {
     clearedAt = lastElementNum;
     initPlot();
 }
-
-//todo: сделать так чтобы методы из этого файла были "приватные" -- либо переименовать, чтобы не путались
 
 convertX = (x) => {
     // console.log('convert x: \n width/2 + x/scale ==> ' + WIDTH + '/' + 2 + ' + ' + x + '/' + scale + ' - ' + X_CENTER + ' =\n'
@@ -164,7 +162,7 @@ drawRValue = (r) => {
     }).move(WIDTH - 50, HEIGHT - 50);
 }
 
-drawAxesScaleLabels = (r) => { //todo: высчитывать координаты аккуратнее
+drawAxesScaleLabels = (r) => {
     console.log('Start drawing axes labels')
     const hatchLen = 0.1;
     console.log("R value while drawing labels: " + r);
@@ -247,7 +245,7 @@ function clickPointEvent(event) {
         removeErrors();
         if (checkValues(coordinates)) {
             console.log('Try to draw point after click. Coordinates: ' + coordinates.x + ', ' + coordinates.y + ', r: ' + coordinates.r);
-            sendData(coordinates, "http://localhost:63342/web-lab-1/php/main.php").then(pointsArray => { //todo: rename method sendData
+            submitData(coordinates, "http://localhost:63342/web-lab-1/php/main.php").then(pointsArray => {
                 drawPlot(pointsArray);
                 drawTable(pointsArray);
             }).catch(err => console.log(err));

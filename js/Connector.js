@@ -1,4 +1,4 @@
-sendData = async (coordinates, url) => {
+submitData = async (coordinates, url) => {
     console.log('Sending json:\n' + JSON.stringify(coordinates))
 
     let response = await fetch(url, {
@@ -14,6 +14,6 @@ sendData = async (coordinates, url) => {
         console.log(json);
         return json;
     } else {
-        throw new Error("Ошибка HTTP: " + response.status); //todo: create my oun exception
+        throw new httpError("Ошибка HTTP: " + response.status);
     }
 }

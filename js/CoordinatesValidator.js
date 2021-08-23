@@ -54,13 +54,14 @@ getValues = () => {
 }
 
 removeErrors = () => {
-    const errors = document.querySelectorAll('.error'); //todo: search in form only
+    const form = document.getElementById('form');
+    const errors = form.querySelectorAll('.error');
     for (let i = 0; i < errors.length; i++) {
         errors[i].remove();
     }
 }
 
 printFormError = (err) => {
-    const submitButton = document.getElementById('submitButton'); //todo: search in form only
+    const submitButton = document.getElementById('submitButton');
     printError('Form error: ' + err.message, 'network error', err.message, submitButton);
 }
