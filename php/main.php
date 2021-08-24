@@ -47,11 +47,3 @@ function not_empty_data($data)
     }
     return $data;
 }
-
-//function serialize_to_JSON($attemptsArray){
-//    $result_string = "[".$attemptsArray[0]->jsonSerialize();
-//    for ($i = 1; $i < count($attemptsArray); $i++) {
-//        $result_string = $result_string.", ".$attemptsArray[$i]->jsonSerialize();
-//    }
-//    return $result_string."]";
-//}
