@@ -8,9 +8,10 @@ session_start();
 
 $attempts = (isset ($_SESSION["attempts"])) ? ($_SESSION["attempts"]) : array();
 
+$json_services = new Services_JSON();
 header('Content-type: application/json');
 $json = file_get_contents('php://input');
-$data = json_decode($json, true);
+$data = $json_services->decode($json, true);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -25,16 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["attempts"] = $attempts;
 //        $_SESSION["attempts"] = array();
 //        session_destroy();
-        echo serialize_to_JSON($attempts);
+        echo $json_services->encode($attempts);
         //todo: think about situation when there is only one element in array -- it steel has to be encoded as array
 
     } catch (Exception $e) {
-        echo json_encode($e->getMessage());
+        echo  $json_services->encode($e->getMessage());
     }
 } elseif ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
     header('Allow: POST, OPTIONS');
 } else {
-    echo json_encode(array('error' => $_SERVER["REQUEST_METHOD"].' request method is not allowed'));
+    echo $json_services->encode(array('error' => $_SERVER["REQUEST_METHOD"].' request method is not allowed'));
 }
 
 function not_empty_data($data)
@@ -47,10 +48,10 @@ function not_empty_data($data)
     return $data;
 }
 
-function serialize_to_JSON($attemptsArray){
-    $result_string = "[".$attemptsArray[0]->jsonSerialize();
-    for ($i = 1; $i < count($attemptsArray); $i++) {
-        $result_string = $result_string.", ".$attemptsArray[$i]->jsonSerialize();
-    }
-    return $result_string."]";
-}
+//function serialize_to_JSON($attemptsArray){
+//    $result_string = "[".$attemptsArray[0]->jsonSerialize();
+//    for ($i = 1; $i < count($attemptsArray); $i++) {
+//        $result_string = $result_string.", ".$attemptsArray[$i]->jsonSerialize();
+//    }
+//    return $result_string."]";
+//}
