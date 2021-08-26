@@ -1,6 +1,7 @@
 <?php
 require_once('dto/Attempt.php');
 require_once('dto/Coordinates.php');
+require_once ('json/json_services.php');
 require_once('exceptions/Empty_data_exception.php');
 require_once('exceptions/Incorrect_input_data_exception.php');
 require_once('verifiers/Coordinates_verifier.php');
@@ -15,7 +16,6 @@ $data = $json_services->decode($json, true);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-//        echo json_encode($data);
         $coords = new Coordinates(not_empty_data($data));
         $verifier = new Coordinates_verifier();
         $start_time = microtime(true);
@@ -26,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["attempts"] = $attempts;
 //        $_SESSION["attempts"] = array();
 //        session_destroy();
-        echo $json_services->encode($attempts);
+//        echo $json_services->encode($attempts);
+        echo encode_json($attempts);
         //todo: think about situation when there is only one element in array -- it steel has to be encoded as array
 
     } catch (Exception $e) {
@@ -46,4 +47,12 @@ function not_empty_data($data)
         }
     }
     return $data;
+}
+
+function encode_json($attemptsArray){
+    $result_string = "[".($attemptsArray[0]->jsonSerialize());
+    for ($i = 1; $i < count($attemptsArray); $i++) {
+        $result_string = $result_string.", ".($attemptsArray[$i]->jsonSerialize());
+    }
+    return $result_string."]";
 }

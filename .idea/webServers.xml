@@ -2,8 +2,12 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="e6fa3abf-417b-4bf1-9e5f-6102ac86a178" name="web-lab-1" url="http://localhost:63342/">
-        <fileTransfer mountedRoot="C:\Users\senin\PhpstormProjects\web-lab-1" accessType="MOUNT" port="0" />
+      <webServer id="6e93d4ef-7ed3-4446-bfa1-3e3ccbac73b2" name="helios" url="http://se.ifmo.ru">
+        <fileTransfer rootFolder="/home/s312986/public_html/web-lab-1" accessType="SFTP" host="se.ifmo.ru" port="2222" sshConfigId="79a8dc61-967b-4590-bb3e-77264a3af94b" sshConfig="s312986@se.ifmo.ru:2222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
       </webServer>
     </option>
   </component>

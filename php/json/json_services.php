@@ -412,7 +412,6 @@ class Services_JSON
                         return $property;
                     }
                 }
-
                 return '{' . join(',', $properties) . '}';
 
             default:

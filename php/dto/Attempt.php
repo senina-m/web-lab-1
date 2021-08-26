@@ -3,9 +3,6 @@
 class Attempt
 {
     private $coordinates;
-    private $x;
-    private $y;
-    private $r;
     private $result;
     private $time;
     private $script_time;
@@ -44,14 +41,15 @@ class Attempt
 
     public function jsonSerialize()
     {
-        return array(
-            'x' => $this->coordinates->get_x(),
-            'y' => $this->coordinates->get_y(),
-            'r' => $this->coordinates->get_r(),
-            'result' => $this->result_to_string(),
-            'time' => $this->time,
-            'script_time' => $this->script_time,
-        );
+        return
+            '{'.
+            '"x":' . $this->coordinates->get_x().', '.
+            '"y":' . $this->coordinates->get_y().', '.
+            '"r":' . $this->coordinates->get_r().','.
+            '"result":"' . $this->result_to_string().'", '.
+            '"time":"' . $this->time.'", '.
+            '"script_time":"' . $this->script_time.'"'.
+            '}';
     }
 }
 

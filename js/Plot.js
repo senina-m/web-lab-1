@@ -245,7 +245,7 @@ function clickPointEvent(event) {
         removeErrors();
         if (checkValues(coordinates)) {
             console.log('Try to draw point after click. Coordinates: ' + coordinates.x + ', ' + coordinates.y + ', r: ' + coordinates.r);
-            submitData(coordinates, "http://localhost:63342/web-lab-1/php/main.php").then(pointsArray => {
+            submitData(coordinates, "https://se.ifmo.ru/~s312986/web-lab-1/php/main.php").then(pointsArray => {
                 drawPlot(pointsArray);
                 drawTable(pointsArray);
             }).catch(err => console.log(err));
