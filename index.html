@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/Table.js"></script>
     <script type="text/javascript" src="js/CoordinatesValidator.js"></script>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" media="handheld" href="styles/mobile.css">
-    <link rel="stylesheet" media="screen and (min-width: 1150px)" href="styles/screen.css">
+    <link rel="stylesheet" media="screen and (min-width: 1024px)" href="styles/screen.css">
+    <link rel="stylesheet" media="only screen and (max-width: 1024px)" href="styles/mobile.css">
 </head>
 <body onload="drawPlot(undefined)">
 <div class="title">
@@ -35,7 +35,7 @@
                     <div>
                         <div>
                             <label for="x">X: </label>
-                            <select id="x" name="x" class='x'>
+                            <select id="x" name="x" class='x field'>
                                 <option value="-4" selected="selected">-4</option>
                                 <option value="-3">-3</option>
                                 <option value="-2">-2</option>
@@ -67,7 +67,7 @@
                 </fieldset>
             </form>
         </div>
-        <div id="table_block">
+        <div id="table_block" class="table">
             <table id='table' class="styled-table">
                 <thead>
                 <tr>
@@ -86,48 +86,13 @@
         </div>
     </div>
     <div class="description">
-        <ol id="notes">
-            <li> Тег u нужен чтобы <u>подчеркнуть</u> слово</li>
-            <li> Тег i нужен чтобы <i>написать курсивом</i></li>
-            <li> Тег b нужен чтобы <b>сделать жирным</b></li>
-        </ol>
-
-        CalculiX — открытый, свободный программный пакет, предназначенный для решения линейных и нелинейных трёхмерных
-        задач механики твёрдого деформируемого тела и механики жидкости и газа с помощью метода конечных элементов.
-        Распространяется под лицензией GNU General Public License. Авторы программы Guido Dhondt (модуль CCX — решатель)
-        и Klaus Wittig (модуль CGX — пре-, постпроцессор) работают в холдинге MTU Aero Engines[en], производящем
-        двигатели для самолётов. Изначально создавался для Linux, в настоящее время существуют сборки для Windows и
-        MacOS. CalculiX входит в состав дистрибутива CAELinux.
-
-        CalculiX является мощным инструментом анализа, который предоставляет пользователю полный контроль над процессом
-        анализа благодаря гибкости настройки конфигурации (прежде всего в исходниках). Разновидности решаемых задач,
-        покрывающих большинство областей МКЭ, возможность изменять любые внутренние переменные по желанию пользователя.
-        Трёхмерное уравнение Навье-Стокса для сжимаемого потока жидкости
-        Бегло взглянуть на возможности CalculiX позволяет фрагмент модели турбореактивного двигателя в карточке
-        программы. Модель построили в начале 90-х гг. Andreas Funke и Klaus Wittig. КЭ-модель позволила определить
-        скорость зажигания и верхнюю частоту вращения, соответствующую низкой усталости и ползучести. Дополнительно был
-        проведён анализ на собственные частоты для оценки возможного резонанса лопаток. Модель, созданная циклическим
-        вращением, посечена 20-узловыми квадратными редуцированными элементами. Материал компрессора — литьевой
-        алюминиевый сплав AlSi — C355, турбина выполнена из термопрочного сплава Inco 713C. Оба нагружены
-        центростремительными силами.
-
-        Препроцессор генеририрует данные как для CCX, так и CFD-данные для duns, ISAAC, OpenFOAM, а также входные
-        input-файлы для коммерческих решателей NASTRAN, ANSYS, Abaqus, некоммерческого решателя code-aster. Препроцессор
-        в состоянии генерировать сетку из файлов STL и др.
-
-        Существует отдельная сборка с патчем, задействующим CUDA и пост/препроцессор ParaView.[1][2][3] С дистрибутивом
-        CAELinux поставляется пакет Calculix Wizard для переброски проекта из Salome в формат CCX. В Salome
-        подготавливается необходимая геометрия и сетка, при необходимости устанавливают граничные условия и контактные
-        ограничения.[3] Близкими возможностями обладает пакет CalculiXForWin. Свежий лаунчер для Win32 и Linux 32/64[4].
-        Благодаря высокой переносимости между разными архитектурами, что обеспечивается исходным программным кодом на
-        Фортране, есть возможность скомпилировать ССХ для Android или настроить удалённый сервер на Debian[5]. Отмечено,
-        что перенос CalculiX на архитектуру Эльбрус не сопровождался переписыванием участков кода, достаточно
-        перекомпиляции исходного кода[6].
-
-        Документация поставляется непосредственно с исходниками, вместе с пакетом bConverged для Windows, и с пакетом
-        CalculiXForWin[7]. На видеохостинге YouTube лежат обучающие видеоролики[8]. На форуме dwg.ru есть документация и
-        статьи с обучающими примерами на русском. Техподдержка по возникающим вопросам проводится непосредственно
-        разработчиками и активным сообществом на официальном канале https://calculix.discourse.group/
+        This service can let you check if the coordinates you have entered fits the area. <br>
+        The area size is fixed by the value of radius R. It has to be a double number from 2 to 5. <br>
+        The coordinates X and Y shows you where the point will be located on the plot. X has to be an integer number
+        from -4 to 4. And Y is a double number from -5 to 3. <br>
+        To enter values you can submit them in form OR just click for plot in the place you want them to be.
+        <br><br>
+        Enjoy the service!
     </div>
 </div>
 </body>

@@ -12,24 +12,24 @@ $attempts = (isset ($_SESSION["attempts"])) ? ($_SESSION["attempts"]) : array();
 $json_services = new Services_JSON();
 header('Content-type: application/json');
 $json = file_get_contents('php://input');
-$data = $json_services->decode($json, true);
+$data = $json_services->decode($json);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $coords = new Coordinates(not_empty_data($data));
-        $verifier = new Coordinates_verifier();
-        $start_time = microtime(true);
-        $result = $verifier->verify($coords);
-        $script_time = microtime(true) - $start_time;
-        $current_attempt = new Attempt($coords, $result, $script_time);
-        array_push($attempts, $current_attempt);
-        $_SESSION["attempts"] = $attempts;
-//        $_SESSION["attempts"] = array();
-//        session_destroy();
+        var_dump(not_empty_data($data));
+//        $coords = new Coordinates(not_empty_data($data));
+//        $verifier = new Coordinates_verifier();
+//        $start_time = microtime(true);
+//        $result = $verifier->verify($coords);
+//        $script_time = microtime(true) - $start_time;
+//        $current_attempt = new Attempt($coords, $result, $script_time);
+//        array_push($attempts, $current_attempt);
+//        $_SESSION["attempts"] = $attempts;
+////        $_SESSION["attempts"] = array();
+////        session_destroy();
 //        echo $json_services->encode($attempts);
-        echo encode_json($attempts);
-        //todo: think about situation when there is only one element in array -- it steel has to be encoded as array
-
+//        //todo: think about situation when there is only one element in array -- it steel has to be encoded as array
+//
     } catch (Exception $e) {
         echo  $json_services->encode($e->getMessage());
     }
@@ -47,12 +47,4 @@ function not_empty_data($data)
         }
     }
     return $data;
-}
-
-function encode_json($attemptsArray){
-    $result_string = "[".($attemptsArray[0]->jsonSerialize());
-    for ($i = 1; $i < count($attemptsArray); $i++) {
-        $result_string = $result_string.", ".($attemptsArray[$i]->jsonSerialize());
-    }
-    return $result_string."]";
 }
