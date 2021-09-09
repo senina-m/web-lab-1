@@ -6,9 +6,14 @@ drawTable = function (pointsArray) {
     for (let i = 0; i < pointsArray.length; i++){
         let point = pointsArray[i];
         let row = new_tbody.insertRow(i);
-        for (let property in point) {
+        let properties = Object.keys(point);
+        for (let property of properties) {
             let td = row.insertCell();
-            td.innerHTML = point[property];
+            if(property === "script_time"){
+                td.innerHTML = parseFloat(point[property]).toFixed(7) + " ns";
+            } else {
+                td.innerHTML = point[property];
+            }
         }
     }
 
