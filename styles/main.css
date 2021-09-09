@@ -12,6 +12,10 @@ h1 {
     line-height: 150%;
 }
 
+.active{
+    color:seagreen;
+}
+
 #heat {
     color: seagreen;
     font-family: "Times New Roman", Times, serif;

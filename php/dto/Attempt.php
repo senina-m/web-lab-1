@@ -35,20 +35,21 @@ class Attempt
         $this->time = date("H:i:s");
     }
 
-    public function result_to_string(){
+    public function result_to_string()
+    {
         return $this->result ? 'true' : 'false';
     }
 
     public function jsonSerialize()
     {
         return
-            '{'.
-            '"x":' . $this->coordinates->get_x().', '.
-            '"y":' . $this->coordinates->get_y().', '.
-            '"r":' . $this->coordinates->get_r().','.
-            '"result":"' . $this->result_to_string().'", '.
-            '"time":"' . $this->time.'", '.
-            '"script_time":"' . $this->script_time.'"'.
+            '{' .
+            '"x":' . $this->coordinates->get_x() . ', ' .
+            '"y":' . $this->coordinates->get_y() . ', ' .
+            '"r":' . $this->coordinates->get_r() . ',' .
+            '"result":"' . $this->result_to_string() . '", ' .
+            '"time":"' . $this->time . '", ' .
+            '"script_time":"' . $this->script_time . '"' .
             '}';
     }
 }

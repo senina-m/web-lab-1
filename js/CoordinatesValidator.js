@@ -15,6 +15,12 @@ printError = (errorLogName, errorClass, errorMessage, element) => {
 
 checkValues = (coordinates) => {
     let anyErrors = 0;
+    if(isNaN(coordinates.x)){
+        this.printError('x is not selected', 'x error',
+            'x is not selected', document.getElementById('x'));
+        anyErrors++;
+    }
+
     if (!printErrorIfBlank(coordinates.y, 'y') || !printErrorIfBlank(coordinates.r, 'r')) {
         anyErrors++;
     }
@@ -44,13 +50,13 @@ printErrorIfBlank = (field, fieldId) => {
 
 getValues = () => {
     console.log('Received values:');
-    let x = document.getElementById('x');
+    let x = getX();
     let y = document.getElementById('y');
     let r = document.getElementById('r');
     console.log('x: ', x.value);
     console.log('y: ', y.value);
     console.log('r: ', r.value);
-    return {x: x.value, y: y.value, r: r.value};
+    return {x: x, y: y.value, r: r.value};
 }
 
 removeErrors = () => {
@@ -63,4 +69,15 @@ removeErrors = () => {
 printFormError = (err) => {
     const submitButton = document.getElementById('submitButton');
     printError('Form error: ' + err.message, 'network error', err.message, submitButton);
+}
+
+getX = () => {
+    console.log("I'm here in getX")
+    let x = NaN;
+    $('input[name="x"]').each(function(i, element) {
+        if ($(element).hasClass("active")) {
+            x = $(element).val();
+        }
+    })
+    return x;
 }
